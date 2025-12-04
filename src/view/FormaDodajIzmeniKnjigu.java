@@ -17,7 +17,7 @@ import model.Zanr;
  * @author Administrator
  */
 public class FormaDodajIzmeniKnjigu extends javax.swing.JDialog {
-    private Controller kontroler;
+    private Controller kontroler = Controller.getInstance();
     private GlavnaForma gf;
     private Knjiga knjigaZaIzmenu;
     /**
@@ -26,7 +26,6 @@ public class FormaDodajIzmeniKnjigu extends javax.swing.JDialog {
     public FormaDodajIzmeniKnjigu(java.awt.Frame parent, boolean modal, Knjiga knjigaZaIzmenu) {
         super(parent, modal);
         initComponents();
-        kontroler = Controller.getInstance();
         gf = (GlavnaForma) parent;
         prepareView();
         if(knjigaZaIzmenu != null){
@@ -73,6 +72,12 @@ public class FormaDodajIzmeniKnjigu extends javax.swing.JDialog {
         jLabel2.setText("Autor");
 
         jLabel3.setText("ISBN");
+
+        jComboBoxAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxAutorActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Godina izdanja");
 
@@ -185,7 +190,7 @@ public class FormaDodajIzmeniKnjigu extends javax.swing.JDialog {
         Autor autor = (Autor) jComboBoxAutor.getSelectedItem();
         //kreiranje nove knjige
         Knjiga novaKnjiga = new Knjiga(naziv, autor, ISBN, godIzdanja, zanr);
-        kontroler.dodajKnjigu(novaKnjiga);
+        kontroler.dodajKnjiguUBazu(novaKnjiga);
         gf.osveziTabelu();
         JOptionPane.showMessageDialog(this, "Knjiga je uspesno dodata!", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
@@ -207,10 +212,15 @@ public class FormaDodajIzmeniKnjigu extends javax.swing.JDialog {
         knjigaZaIzmenu.setGodinaIzdanja(godIzdanja);
         knjigaZaIzmenu.setNaslov(naziv);
         knjigaZaIzmenu.setZanr(zanr);
+        kontroler.azurirajKnjiguUbazi(knjigaZaIzmenu);
         gf.osveziTabelu();
         JOptionPane.showMessageDialog(this, "Knjiga je uspesno izmenjena!", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
     }//GEN-LAST:event_jButtonIzmeniActionPerformed
+
+    private void jComboBoxAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAutorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxAutorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDodaj;
@@ -230,7 +240,7 @@ public class FormaDodajIzmeniKnjigu extends javax.swing.JDialog {
 
     private void prepareView() {
         jComboBoxAutor.removeAllItems();
-        List<Autor> autori = kontroler.getListaAutora();
+        List<Autor> autori = kontroler.ucitajListuAutoraIzBaze();
         for(Autor a : autori){
             jComboBoxAutor.addItem(a);
         }

@@ -16,7 +16,7 @@ import model.Knjiga;
 public class ModelTabeleKnjige extends AbstractTableModel{
     //private List<Knjiga> listaKnjiga = Controller.getInstance().getListaKnjiga();; mada svkk msm da ce se prosledi lista preko konstruktora
     private List<Knjiga> listaKnjiga;
-    private String[] kolone = new String[]{ "Naslov", "Autor", "ISBN", "Godina izdanja", "Zanr"};
+    private String[] kolone = new String[]{"Naslov", "Autor", "ISBN", "Godina izdanja", "Zanr"};
     
     public ModelTabeleKnjige(List<Knjiga> listaKnjiga){
         this.listaKnjiga = listaKnjiga;
@@ -60,5 +60,10 @@ public class ModelTabeleKnjige extends AbstractTableModel{
 //        fireTableDataChanged();
 //    }
 //    
+
+    public List<Knjiga> getListaKnjiga() {
+        return listaKnjiga;
+    }
+    
     
 }

@@ -16,7 +16,7 @@ import model.Zanr;
  */
 public class GlavnaForma extends javax.swing.JFrame {
     
-    private Controller kontroler;
+    private Controller kontroler = Controller.getInstance();
     /**
      * Creates new form GlavnaForma
      */
@@ -178,7 +178,8 @@ public class GlavnaForma extends javax.swing.JFrame {
         if(selektovaniRed == -1){
             JOptionPane.showMessageDialog(this, "Morate selektovati knjigu koju zelite izmeniti!", "Greska", JOptionPane.ERROR_MESSAGE);
         }else{
-            Knjiga selektovanaKnjiga = kontroler.getListaKnjiga().get(selektovaniRed);
+            ModelTabeleKnjige mtk = (ModelTabeleKnjige) jTableKnjige.getModel();
+            Knjiga selektovanaKnjiga = mtk.getListaKnjiga().get(selektovaniRed);
             FormaDodajIzmeniKnjigu fdik = new FormaDodajIzmeniKnjigu(this, true, selektovanaKnjiga);
             fdik.setVisible(true);
         }
@@ -200,8 +201,9 @@ public class GlavnaForma extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Morate selektovati knjigu koju zelite obrisati!", "Greska", JOptionPane.ERROR_MESSAGE);
         }
         else{
-            kontroler = Controller.getInstance();
-            kontroler.obrisiKnjigu(selektovaniRed);
+            ModelTabeleKnjige mtk = (ModelTabeleKnjige) jTableKnjige.getModel();
+            int id = mtk.getListaKnjiga().get(selektovaniRed).getId();
+            kontroler.obrisiKnjigu(id);
             osveziTabelu();
         }
     }//GEN-LAST:event_jButtonObrisiActionPerformed
@@ -259,13 +261,12 @@ public class GlavnaForma extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void prepareView() {
-        kontroler = Controller.getInstance();
-        ModelTabeleKnjige mtk = new ModelTabeleKnjige(kontroler.getListaKnjiga());
+        //kontroler = Controller.getInstance();
+        ModelTabeleKnjige mtk = new ModelTabeleKnjige(kontroler.ucitajListuKnjigaIzBaze());
         jTableKnjige.setModel(mtk);
     }
 
     void osveziTabelu() {
-        ModelTabeleKnjige mtk = (ModelTabeleKnjige) jTableKnjige.getModel();
-        mtk.fireTableDataChanged();
+        prepareView();
     }
 }

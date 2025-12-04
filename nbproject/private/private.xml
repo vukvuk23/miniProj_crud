@@ -5,9 +5,12 @@
         <group>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/PS_CAS_1_2/src/model/Knjiga.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/PS_CAS_1_2/src/controller/Controller.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/PS_CAS_1_2/src/baza/Konekcija.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/PS_CAS_1_2/src/view/ModelTabeleKnjige.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/PS_CAS_1_2/src/model/Zanr.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/PS_CAS_1_2/src/model/Autor.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/PS_CAS_1_2/src/view/GlavnaForma.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/PS_CAS_1_2/src/baza/DBBroker.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/PS_CAS_1_2/src/view/FormaDodajIzmeniKnjigu.java</file>
         </group>
     </open-files>
